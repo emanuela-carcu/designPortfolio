@@ -20,7 +20,6 @@ public class DesignersController {
         return designersRepo.save(designer);
     }
 
-
     @GetMapping()
     public List<Designers> designers(){
 

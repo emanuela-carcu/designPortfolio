@@ -11,11 +11,10 @@ public class Clients {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String Nume;
-    private String Prenume;
-    private Long NrTelefon;
-    private String Email;
-    private String adresaFacturare;
+    private String nume;
+    private String prenume;
+    private String nrTelefon;
+    private String email;
     private int nrProiecteFinalizate;
     private double valoareProiecteFinalizate;
 

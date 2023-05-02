@@ -11,12 +11,12 @@ public class Designers {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String Nume;
-    private String Prenume;
-    private String Email;
-    private String Description;
+    private String nume;
+    private String prenume;
+    private String email;
+    private String descriere;
     private String abilitati;
-    private int experience;
+    private int experienta;
 
 
 }
