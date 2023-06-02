@@ -4,21 +4,26 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.List;
-
 @Entity
-@Table(name = "portfolio")
+@Table(name = "cerere_proiecte")
 @Getter
 @Setter
-public class Portfolio {
+public class CerereProiect {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String title;
-    private String description;
-    @ElementCollection
-    private List<byte[]> images;
+
     @ManyToOne
-    @JoinColumn(name="designer_id")
+    @JoinColumn(name = "client_id")
+    private Clients client;
+
+    @ManyToOne
+    @JoinColumn(name = "designer_id")
     private Designers designer;
+
+    @ManyToOne
+    @JoinColumn(name = "service_id")
+    private Services service;
+
+
 }

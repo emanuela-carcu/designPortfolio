@@ -41,6 +41,13 @@ public class ClientsController {
         return clientsRepo.findAll();
     }
 
+    @GetMapping("{id}")
+    public Clients getClientById(@PathVariable("id") Long id) {
+        return clientsRepo.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Client not found with id: " + id));
+    }
+
+
     @DeleteMapping("delete/{client_id}")
     public void deleteClient(@PathVariable("client_id") Long clientId) {
 

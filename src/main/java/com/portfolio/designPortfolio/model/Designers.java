@@ -14,9 +14,8 @@ public class Designers {
     private String nume;
     private String prenume;
     private String email;
-    private String descriere;
+    private String description;
     private String abilitati;
-    private int experienta;
-
+    private String experience;
 
 }
