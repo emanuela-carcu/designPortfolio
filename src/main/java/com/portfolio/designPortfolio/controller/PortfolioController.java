@@ -1,13 +1,17 @@
 package com.portfolio.designPortfolio.controller;
-import com.portfolio.designPortfolio.model.Designers;
+
 import com.portfolio.designPortfolio.model.Portfolio;
-import com.portfolio.designPortfolio.repo.DesignersRepo;
+import com.portfolio.designPortfolio.model.User;
 import com.portfolio.designPortfolio.repo.PortfolioRepo;
+import com.portfolio.designPortfolio.repo.UserRepo;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 @RestController
 @RequestMapping("/portfolio")
@@ -15,17 +19,26 @@ public class PortfolioController {
 
     @Autowired
     public PortfolioRepo portfolioRepo;
+
     @Autowired
-    private DesignersRepo designersRepo;
+    private UserRepo userRepo;
 
 
-    @PostMapping("create")
-    public Portfolio createPortfolio(@RequestBody Portfolio project) {
-        Designers designer = designersRepo.findById(project.getDesigner().getId())
-                .orElseThrow(() -> new ResourceNotFoundException("Designer not found with id: " + project.getDesigner().getId()));
+    @PostMapping("/create")
+    public Portfolio createPortfolio(@RequestParam("designerId") Long designerId,  @RequestParam("images") MultipartFile[] images,
+                                    @RequestParam("title") String title, @RequestParam("description") String description) throws IOException {
+        Portfolio portfolio = new Portfolio();
+        User designer = userRepo.findById(designerId)
+                .orElseThrow(() -> new ResourceNotFoundException("Designer not found with id: " + designerId));
 
-        project.setDesigner(designer);
-        return portfolioRepo.save(project);
+        portfolio.setDesigner(designer);
+        portfolio.setImages(new ArrayList<>());
+        portfolio.setDescription(description);
+        portfolio.setTitle(title);
+        for (MultipartFile file: images) {
+            portfolio.getImages().add(file.getBytes());
+        }
+        return portfolioRepo.save(portfolio);
     }
 
 
@@ -47,7 +60,7 @@ public class PortfolioController {
         Portfolio portfolio = portfolioRepo.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Portfolio not found with id: " + id));
 
-        Designers designer = designersRepo.findById(updatedPortfolio.getDesigner().getId())
+        User designer = userRepo.findById(updatedPortfolio.getDesigner().getId())
                 .orElseThrow(() -> new ResourceNotFoundException("Designer not found with id: " + updatedPortfolio.getDesigner().getId()));
 
         portfolio.setDesigner(designer);

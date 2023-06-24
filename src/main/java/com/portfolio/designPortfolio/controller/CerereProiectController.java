@@ -14,6 +14,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/cereri-proiect")
 public class CerereProiectController {
+
     @Autowired
     public CerereProiectRepo cerereProiectRepo;
 
@@ -55,5 +56,9 @@ public class CerereProiectController {
         cerereProiectRepo.deleteById(id);
     }
 
+    @GetMapping("client/{clientId}")
+    public List<CerereProiect> getAllForClient(@PathVariable Long clientId) {
+        return cerereProiectService.getAllByClientId(clientId);
+    }
 
 }

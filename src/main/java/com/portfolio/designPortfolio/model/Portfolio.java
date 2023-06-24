@@ -11,14 +11,19 @@ import java.util.List;
 @Getter
 @Setter
 public class Portfolio {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String title;
+
     private String description;
+
     @ElementCollection
     private List<byte[]> images;
+
     @ManyToOne
     @JoinColumn(name="designer_id")
-    private Designers designer;
+    private User designer;
 }

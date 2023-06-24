@@ -15,11 +15,11 @@ public class CerereProiect {
 
     @ManyToOne
     @JoinColumn(name = "client_id")
-    private Clients client;
+    private User client;
 
     @ManyToOne
     @JoinColumn(name = "designer_id")
-    private Designers designer;
+    private User designer;
 
     @ManyToOne
     @JoinColumn(name = "service_id")

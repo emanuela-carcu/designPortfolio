@@ -17,14 +17,12 @@ public class ServicesController {
 
     @PostMapping("create")
     public Services createService (@RequestBody Services service){
-
         return servicesRepo.save(service);
     }
 
 
     @GetMapping()
     public List<Services> services(){
-
         return servicesRepo.findAll();
     }
 
