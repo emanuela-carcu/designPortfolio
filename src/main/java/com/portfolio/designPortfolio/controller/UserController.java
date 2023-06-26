@@ -21,8 +21,11 @@ public class UserController {
 
     @PostMapping("create")
     public User createUser(@RequestBody User user) {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         return userRepository.save(user);
     }
+
+
 
     @PutMapping("{id}")
     public User updateUser(@PathVariable long id, @RequestBody User userDetails) {
@@ -32,9 +35,9 @@ public class UserController {
         updateUser.setFirstName(userDetails.getFirstName());
         updateUser.setLastName(userDetails.getLastName());
         updateUser.setEmail(userDetails.getEmail());
+        updateUser.setPhoneNumber(userDetails.getPhoneNumber());
         updateUser.setPassword(userDetails.getPassword());
         updateUser.setDescription(userDetails.getDescription());
-        updateUser.setSkills(userDetails.getSkills());
         updateUser.setExperience(userDetails.getExperience());
 
         return userRepository.save(updateUser);

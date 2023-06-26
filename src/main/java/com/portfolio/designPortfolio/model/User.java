@@ -28,12 +28,46 @@ public class User {
 
     private String description;
 
-    private String skills;
+    @Column
+    private boolean skills_ui_ux;
+
+    @Column
+    private boolean skills_ar_vr;
+
+    @Column
+    private boolean skills_digital;
+
+    @Column
+    private boolean skills_animation;
+
+    @Column
+    private boolean skills_film_editing;
+
+    @Column
+    private boolean skills_visual_effects;
+
+    @Column
+    private boolean skills_three_motion;
+
+    @Column
+    private boolean skills_three_art;
+
+    private String phoneNumber;
 
     private int experience;
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
 
     @Column
     @Enumerated(EnumType.STRING)
     private UserRole role;
 
+    // Add getters and setters
 }
